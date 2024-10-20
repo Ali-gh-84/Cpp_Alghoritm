@@ -7,14 +7,12 @@ using namespace std;
 //
 
 void showrepatenumber(int arr[], int size) {
+    cout << "Repeating elements are ";
     for (int i = 0; i < size; i++) {
         for (int j = i + 1; j < size; j++) {
             if (arr[i] == arr[j]) {
-                cout << "Repeating elements are " << arr[i] << " ";
+                cout << arr[i] << " ";
                 break;
-            } else {
-                cout << "not exist repate number !";
-                return;
             }
         }
     }

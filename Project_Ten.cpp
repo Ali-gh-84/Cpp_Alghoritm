@@ -11,7 +11,7 @@ int main() {
     int number2 = 1;
     int sum = 0;
 
-    while (sum <= 1000) {
+    while (number1 <= 100) {
         cout << number1 << endl;
         sum = number1 + number2;
         number1 = number2;

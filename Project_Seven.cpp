@@ -8,16 +8,14 @@ using namespace std;
 
 int main() {
     int number;
-    int abs;
 
     cout << "Enter a number: ";
     cin >> number;
 
     if (number < 0) {
-        abs = number * -1;
-        cout << "absolute number is : " << abs << endl;
-    } else {
-        cout << "number is positive " << endl;
+        number *= -1;
+
     }
+    cout << "absolute number is : " << number << endl;
     return 0;
 }

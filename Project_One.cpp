@@ -6,26 +6,26 @@ using namespace std;
 // * sum , minus , multiple , division two number *
 //
 
-int sumfunction(int number1 ,int number2) {
+void sumfunction(int number1 ,int number2) {
     cout << "enter two number : " << endl;
     cin >> number1 >> number2;
     cout << "The Sum is " << number1 + number2 << endl;
 }
 
-int minusfunction(int number1 , int number2) {
+void minusfunction(int number1 , int number2) {
     cout << "enter two number : " << endl;
     cin >> number1 >> number2;
     cout << "The minus is " << number1 - number2 << endl;
 
 }
 
-int multiplefunction(int number1 , int number2) {
+void multiplefunction(int number1 , int number2) {
     cout << "enter two number : " << endl;
     cin >> number1 >> number2;
     cout << "The multiple is " << number1 * number2 << endl;
 }
 
-int divisionfunction(int number1 , int number2) {
+void divisionfunction(int number1 , int number2) {
     cout << "enter two number : " << endl;
     cin >> number1 >> number2;
     cout << "The division is " << number1 / number2 << endl;
@@ -35,7 +35,7 @@ int main() {
 
     int number1, number2;
     int option;
-
+        do{
         cout << "1) sum numbers  "
                 "2) minus numbers  "
                 "3) multiple numbers  "
@@ -63,8 +63,10 @@ int main() {
                 break;
             default:
                 cout << "Invalid Option";
-            break;
+                break;
         }
-        return 0;
+        }while(option != 5);
+    return 0;
+
     }
 

@@ -3,7 +3,7 @@ using namespace std;
 
 //
 // * this file for first projects with c++ *
-// * prime numbers *
+// * prime numbers *1
 //
 
 bool isPrime(int number) {
@@ -27,12 +27,12 @@ bool isPrime(int number) {
     }
 }
 
-    int main(){
+int main(){
 
-        int number;
+    int number;
 
-        cout << "enter a number : ";
-        cin >> number;
-
-        cout << isPrime(number) << endl;
-    }
+    cout << "enter a number : ";
+    cin >> number;
+    isPrime(number);
+    cout << endl;
+}

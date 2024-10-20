@@ -12,12 +12,12 @@ int main() {
     int average = 0;
     int count = 0;
 
-    while (number != 0) {
+    do {
         count++;
         cout << "Enter a number: ";
         cin >> number;
         sum += number;
-    }
-    average = sum / count;
+    } while (number > 0);
+    average = sum / (count - 1);
     cout << "average is : " << average;
 }

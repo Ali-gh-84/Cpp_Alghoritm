@@ -12,16 +12,14 @@ int main() {
     int average = 0;
     int count = -1;
 
-    bool again = true;
-    while (again) {
-        if (number >= 0) {
+    while (true) {
             cout << "Enter a number: ";
             cin >> number;
             count++;
+        if (number >= 0) {
             sum += number;
         } else {
-            again = false;
-            sum += 1;
+            break;
         }
     }
     average = sum / count;

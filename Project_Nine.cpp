@@ -41,7 +41,7 @@ void printtable() {
 }
 
 string show_win() {
-    return (getcharofround() == 'X') ? player1 : player2;
+    return (getcharofround() == 'X') ? player2 : player1;
 }
 
 void getinput() {

@@ -8,24 +8,19 @@ using namespace std;
 
 int main() {
     int count = 0;
-    int number;
+    long number;
 
     cout << "Enter a number: ";
     cin >> number;
 
     if (number == 0) {
-        cout << "number is 0 !" << endl;
+        cout << "number is 1 digit !" << endl;
         return 0;
     }
 
-    if (number < 0) {
-        cout << "number is negative !" << endl;
-        return 0;
-    }
-
-    while (number > 0) {
+    while (number > 0 || number < 0) {
         count++;
-        number = number / 10;
+        number /= 10;
     }
     cout << "digit of number is : " << count << endl;
     return 0;
