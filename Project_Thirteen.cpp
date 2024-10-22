@@ -14,7 +14,6 @@ int arr2[4][4];
 
 // Initialize the table with random values and show them *
 void initializerTable() {
-
     srand(static_cast<unsigned int>(time(0)));
     random_shuffle(arr.begin(), arr.end());
 
@@ -40,7 +39,6 @@ void initializerTable() {
 
 // Show the player the current table *
 void showPlayerTable() {
-
     cout << " \t-------\t-------\t-------\t--------" << endl;
     for (int i = 0; i < 4; i++) {
         cout << "\t";
@@ -54,33 +52,43 @@ void showPlayerTable() {
 
 // Get player input and check the indexes *
 void getInput() {
-
     int inputOne, inputTwo;
+
+
     cout << "Enter your first number (1-16): ";
     cin >> inputOne;
     int row1 = (inputOne - 1) / 4;
     int col1 = (inputOne - 1) % 4;
+    if (table[row1][col1] != '*') {
+        cout << "You have already chosen this number. Try again." << endl;
+        return;
+    }
     table[row1][col1] = '0' + arr2[row1][col1];
     showPlayerTable();
+
 
     cout << "Enter your second number (1-16): ";
     cin >> inputTwo;
     int row2 = (inputTwo - 1) / 4;
     int col2 = (inputTwo - 1) % 4;
+    if (table[row2][col2] != '*') {
+        cout << "You have already chosen this number. Try again." << endl;
+        table[row1][col1] = '*';
+        return;
+    }
     table[row2][col2] = '0' + arr2[row2][col2];
     showPlayerTable();
 
 
-    if (arr2[row1][col1] == arr2[row2][col2]) {
-        table[row1][col1] = '0' + arr2[row1][col1];
-        table[row2][col2] = '0' + arr2[row2][col2];
+    if (arr2[row1][col1] == arr2[row2][col2] && inputOne != inputTwo) {
         cout << "Match found!" << endl;
     } else {
         table[row1][col1] = '*';
         table[row2][col2] = '*';
         cout << "Not a match. Try again." << endl;
     }
-    sleep(2); // Pause for 5 seconds
+
+    sleep(2); // Pause for 2 seconds
     system("clear"); // Clear the screen
 }
 
@@ -109,3 +117,4 @@ int main() {
     }
     return 0;
 }
+
