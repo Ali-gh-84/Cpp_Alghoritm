@@ -58,24 +58,26 @@ void getInput() {
     int inputOne, inputTwo;
     cout << "Enter your first number (1-16): ";
     cin >> inputOne;
-    cout << "Enter your second number (1-16): ";
-    cin >> inputTwo;
-
     int row1 = (inputOne - 1) / 4;
     int col1 = (inputOne - 1) % 4;
+    table[row1][col1] = '0' + arr2[row1][col1];
+    showPlayerTable();
+
+    cout << "Enter your second number (1-16): ";
+    cin >> inputTwo;
     int row2 = (inputTwo - 1) / 4;
     int col2 = (inputTwo - 1) % 4;
+    table[row2][col2] = '0' + arr2[row2][col2];
+    showPlayerTable();
 
-    // Show selected values *
-    cout << "First selected value: " << arr2[row1][col1] << endl;
-    cout << "Second selected value: " << arr2[row2][col2] << endl;
 
-    // Check if the selected values match *
     if (arr2[row1][col1] == arr2[row2][col2]) {
         table[row1][col1] = '0' + arr2[row1][col1];
         table[row2][col2] = '0' + arr2[row2][col2];
         cout << "Match found!" << endl;
     } else {
+        table[row1][col1] = '*';
+        table[row2][col2] = '*';
         cout << "Not a match. Try again." << endl;
     }
     sleep(2); // Pause for 5 seconds
