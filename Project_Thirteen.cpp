@@ -2,40 +2,43 @@
 #include <cstdlib>
 #include <unistd.h>
 #include <string>
+#include <vector>
+#include <algorithm>
+#include <ctime>
 
 using namespace std;
 
-//
-// * this file for first projects with c++ *
-// * guess the number *
-//
+char table[4][4] = {{'*', '*', '*', '*'}, {'*', '*', '*', '*'}, {'*', '*', '*', '*'}, {'*', '*', '*', '*'}};
+vector<int> arr = {1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8};
+int arr2[4][4];
 
+// Initialize the table with random values and show them *
+void initializerTable() {
 
-// for initialization index home *
-int arr[4][4] = {{1,5,8,6},{3,4,2,1},{2,5,6,8},{7,4,7,3}};  // {{(0,0),2,3,(0,3)},{(1,0),6,7,(1,3)},{(2,0),10,11,(2,3)},{(3,0),14,15,(3,3)}}
-char table [4][4] = {{'*','*','*','*'},{'*','*','*','*'},{'*','*','*','*'},{'*','*','*','*'}};
+    srand(static_cast<unsigned int>(time(0)));
+    random_shuffle(arr.begin(), arr.end());
 
-
-// for show main table *
-void showMainTable() {
+    for (int i = 0; i < 4; ++i) {
+        for (int j = 0; j < 4; ++j) {
+            arr2[i][j] = arr[i * 4 + j];
+        }
+    }
 
     cout << "\t-------\t-------\t-------\t---------" << endl;
     for (int i = 0; i < 4; i++) {
         cout << "\t";
         for (int j = 0; j < 4; j++) {
-            cout << "|   " << arr[i][j] << "   ";
+            cout << "|   " << arr2[i][j] << "   ";
         }
         cout << "|" << endl;
         cout << "\t-------\t-------\t-------\t---------" << endl;
     }
 
-    // for clear console after 5 seconds *
-    sleep(5);
-    system("clear");
-
+    sleep(5); // Pause for 5 seconds
+    system("clear"); // Clear the screen
 }
 
-// for show table without number to player *
+// Show the player the current table *
 void showPlayerTable() {
 
     cout << " \t-------\t-------\t-------\t--------" << endl;
@@ -49,59 +52,37 @@ void showPlayerTable() {
     }
 }
 
-// for get two number as player and Placing numbers in houses *
+// Get player input and check the indexes *
 void getInput() {
 
-    int inputone;
-    int inputtwo;
+    int inputOne, inputTwo;
+    cout << "Enter your first number (1-16): ";
+    cin >> inputOne;
+    cout << "Enter your second number (1-16): ";
+    cin >> inputTwo;
 
-    while (true) {
+    int row1 = (inputOne - 1) / 4;
+    int col1 = (inputOne - 1) % 4;
+    int row2 = (inputTwo - 1) / 4;
+    int col2 = (inputTwo - 1) % 4;
 
-        cout << "Enter your first home between 1-16 : ";
-        cin >> inputone;
-        cout << "Enter your second home between 1-16 : ";
-        cin >> inputtwo;
-        cout << endl;
+    // Show selected values *
+    cout << "First selected value: " << arr2[row1][col1] << endl;
+    cout << "Second selected value: " << arr2[row2][col2] << endl;
 
-        if (inputone >= 1 && inputone <= 16 && (inputone == 1 && inputtwo == 8) || (inputone == 8 && inputtwo == 1)) {
-            table[0][0] = '1';
-            table[1][3] = '1';
-        }
-        else if (inputone >= 1 && inputone <= 16 && (inputone == 7 && inputtwo == 9) || (inputone == 9 && inputtwo == 7)) {
-            table[1][2] = '2';
-            table[2][0] = '2';
-        }
-        else if (inputone >= 1 && inputone <= 16 && (inputone == 5 && inputtwo == 16) || (inputone == 16 && inputtwo == 5)) {
-            table[1][0] = '3';
-            table[3][3] = '3';
-        }
-        else if (inputone >= 1 && inputone <= 16 && (inputone == 6 && inputtwo == 14) || (inputone == 14 && inputtwo == 6)) {
-            table[1][1] = '4';
-            table[3][1] = '4';
-        }
-        else if (inputone >= 1 && inputone <= 16 && (inputone == 2 && inputtwo == 10) || (inputone == 10 && inputtwo == 2)) {
-            table[0][1] = '5';
-            table[2][1] = '5';
-        }
-        else if (inputone >= 1 && inputone <= 16 && (inputone == 4 && inputtwo == 11) || (inputone == 11 && inputtwo == 4)) {
-            table[0][3] = '6';
-            table[2][2] = '6';
-        }
-        else if (inputone >= 1 && inputone <= 16 && (inputone == 13 && inputtwo == 15) || (inputone == 15 && inputtwo == 13)) {
-            table[3][0] = '7';
-            table[3][2] = '7';
-        }
-        else if (inputone >= 1 && inputone <= 16 && (inputone == 3 && inputtwo == 12) || (inputone == 12 && inputtwo == 3)) {
-            table[0][2] = '8';
-            table[2][3] = '8';
-        }else {
-            cout << "Inputs are not Equal Value!" << endl;
-        }
-        break;
+    // Check if the selected values match *
+    if (arr2[row1][col1] == arr2[row2][col2]) {
+        table[row1][col1] = '0' + arr2[row1][col1];
+        table[row2][col2] = '0' + arr2[row2][col2];
+        cout << "Match found!" << endl;
+    } else {
+        cout << "Not a match. Try again." << endl;
     }
+    sleep(2); // Pause for 5 seconds
+    system("clear"); // Clear the screen
 }
 
-// for check home to full game *
+// Check if the game board is full
 bool isFull() {
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 4; j++) {
@@ -113,10 +94,8 @@ bool isFull() {
     return true;
 }
 
-
-int main(){
-
-    showMainTable();
+int main() {
+    initializerTable();
     while (true) {
         showPlayerTable();
         getInput();
